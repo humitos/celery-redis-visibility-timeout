@@ -1,0 +1,21 @@
+services:
+
+  worker:
+    image: python:3.12
+    volumes:
+      - $PWD:/app
+    entrypoint: /app/worker.sh
+    stop_grace_period: 1s
+
+  task-trigger:
+    image: python:3.12
+    volumes:
+      - $PWD:/app
+    entrypoint: /app/task_trigger.sh
+    stop_grace_period: 1s
+
+  cache:
+    image: redis:6.2.6
+    command: >
+          --requirepass "redispassword"
+    stop_grace_period: 1s
