@@ -6,4 +6,4 @@ if [ ! -e $HOME/.local/bin/uv ]; then
     $HOME/.local/bin/uv pip install 'celery[redis]==5.5.3'
 fi
 
-$HOME/.local/bin/uv run python3 /app/tasks.py
+$HOME/.local/bin/uv run python3 -u /app/tasks.py
