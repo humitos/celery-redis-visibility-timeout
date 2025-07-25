@@ -9,9 +9,13 @@ app = Celery(
 )
 
 # https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/redis.html#redis-caveats
-app.conf.broker_transport_options = {'visibility_timeout': 5}
-app.conf.result_backend_transport_options = {'visibility_timeout': 5}
-app.conf.visibility_timeout = 5
+#app.conf.broker_transport_options = {'visibility_timeout': 5}
+#app.conf.result_backend_transport_options = {'visibility_timeout': 5}
+#app.conf.visibility_timeout = 5
+
+# Make sure that tasks are acknowledged only once they are completed and timeout will trigger a retry
+app.conf.task_acks_on_failure_or_timeout = False
+app.conf.task_acks_late = True
 
 
 @app.task
